@@ -10,13 +10,12 @@ void TitleScene::Initialize()
 void TitleScene::Update(float elapsedTime)
 {
 	UNREFERENCED_PARAMETER(elapsedTime);
-
-	auto* debugFont = GetUserResources()->GetDebugFont();
-	debugFont->AddString(L"TitleScene", SimpleMath::Vector2(0.0f, debugFont->GetFontHeight()));
 }
 
 void TitleScene::Render()
 {
+	auto* debugFont = GetUserResources()->GetDebugFont();
+	debugFont->AddString(L"TitleScene", SimpleMath::Vector2(0.0f, debugFont->GetFontHeight()));
 }
 
 void TitleScene::Finalize()
