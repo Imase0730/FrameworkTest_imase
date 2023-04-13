@@ -83,3 +83,7 @@ namespace DX
         }
     }
 }
+
+#include <sstream>
+#include "SimpleMath.h"
+#include "CommonStates.h"

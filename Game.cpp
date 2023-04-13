@@ -33,10 +33,10 @@ void Game::Initialize(HWND window, int width, int height)
 
     // TODO: Change the timer settings if you want something other than the default variable timestep mode.
     // e.g. for 60 FPS fixed timestep update logic, call:
-    /*
+    
     m_timer.SetFixedTimeStep(true);
     m_timer.SetTargetElapsedSeconds(1.0 / 60);
-    */
+    
 }
 
 #pragma region Frame Update
@@ -78,6 +78,14 @@ void Game::Render()
 
     // TODO: Add your rendering code here.
     context;
+    
+    // fpsの表示
+    std::wostringstream oss;
+    oss << "fps:" << m_timer.GetFramesPerSecond();
+    m_debugFont->AddString(oss.str().c_str(), SimpleMath::Vector2(0.0f, 0.0f));
+
+    // デバッグフォントの描画
+    m_debugFont->Render(m_states.get());
 
     m_deviceResources->PIXEndEvent();
 
@@ -166,9 +174,15 @@ void Game::GetDefaultSize(int& width, int& height) const noexcept
 void Game::CreateDeviceDependentResources()
 {
     auto device = m_deviceResources->GetD3DDevice();
+    auto context = m_deviceResources->GetD3DDeviceContext();
 
     // TODO: Initialize device dependent objects here (independent of window size).
-    device;
+
+    // デバッグ文字列出力の作成
+    m_debugFont = std::make_unique<Imase::DebugFont>(device, context, L"Resources/Font/SegoeUI_18.spritefont");
+
+    // 共通ステートの作成
+    m_states = std::make_unique<CommonStates>(device);
 }
 
 // Allocate all memory resources that change on a window SizeChanged event.
