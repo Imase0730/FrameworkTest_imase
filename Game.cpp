@@ -60,8 +60,12 @@ void Game::Update(DX::StepTimer const& timer)
     elapsedTime;
 
     // キーボードステートトラッカーの更新
-    auto state = Keyboard::Get().GetState();
-    m_tracker.Update(state);
+    auto kbState = Keyboard::Get().GetState();
+    m_keyboardTracker.Update(kbState);
+
+    // マウスステートトラッカーの更新
+    auto msState = Mouse::Get().GetState();
+    m_mouseTracker.Update(msState);
 
 }
 #pragma endregion

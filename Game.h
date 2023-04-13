@@ -77,7 +77,10 @@ public:
 private:
 
     // キーボードステートトラッカー
-    DirectX::Keyboard::KeyboardStateTracker m_tracker;
+    DirectX::Keyboard::KeyboardStateTracker m_keyboardTracker;
+    
+    // マウスステートトラッカー
+    DirectX::Mouse::ButtonStateTracker m_mouseTracker;
 
     // デバッグ文字列出力
     std::unique_ptr<Imase::DebugFont> m_debugFont;
