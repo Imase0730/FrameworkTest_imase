@@ -43,6 +43,9 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
     HRESULT hr = CoInitializeEx(nullptr, COINITBASE_MULTITHREADED);
     if (FAILED(hr))
         return 1;
+    
+    std::unique_ptr<Keyboard> keyboard;
+    keyboard = std::make_unique<Keyboard>();
 
     g_game = std::make_unique<Game>();
 
@@ -218,6 +221,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         break;
 
     case WM_ACTIVATEAPP:
+
+        Keyboard::ProcessMessage(message, wParam, lParam);
+
         if (game)
         {
             if (wParam)
@@ -291,6 +297,21 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         // A menu is active and the user presses a key that does not correspond
         // to any mnemonic or accelerator key. Ignore so we don't produce an error beep.
         return MAKELRESULT(0, MNC_CLOSE);
+
+    case WM_ACTIVATE:
+//    case WM_ACTIVATEAPP:
+        Keyboard::ProcessMessage(message, wParam, lParam);
+        break;
+
+    case WM_SYSKEYDOWN:
+        Keyboard::ProcessMessage(message, wParam, lParam);
+        break;
+
+    case WM_KEYDOWN:
+    case WM_KEYUP:
+    case WM_SYSKEYUP:
+        Keyboard::ProcessMessage(message, wParam, lParam);
+        break;
     }
 
     return DefWindowProc(hWnd, message, wParam, lParam);

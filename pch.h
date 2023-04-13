@@ -85,5 +85,6 @@ namespace DX
 }
 
 #include <sstream>
+#include "Keyboard.h"
 #include "SimpleMath.h"
 #include "CommonStates.h"

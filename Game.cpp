@@ -58,6 +58,11 @@ void Game::Update(DX::StepTimer const& timer)
 
     // TODO: Add your game logic here.
     elapsedTime;
+
+    // キーボードステートトラッカーの更新
+    auto state = Keyboard::Get().GetState();
+    m_tracker.Update(state);
+
 }
 #pragma endregion
 
