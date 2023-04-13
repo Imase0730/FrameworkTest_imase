@@ -19,7 +19,7 @@ namespace
     std::unique_ptr<Game> g_game;
 }
 
-LPCWSTR g_szAppName = L"FrameworkTest_imase";
+LPCWSTR g_szAppName = L"就職作品のタイトル";
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 void ExitGame() noexcept;
@@ -68,9 +68,9 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 
         RECT rc = { 0, 0, static_cast<LONG>(w), static_cast<LONG>(h) };
 
-        AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
+        AdjustWindowRect(&rc, WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX, FALSE);
 
-        HWND hwnd = CreateWindowExW(0, L"FrameworkTest_imaseWindowClass", g_szAppName, WS_OVERLAPPEDWINDOW,
+        HWND hwnd = CreateWindowExW(0, L"FrameworkTest_imaseWindowClass", g_szAppName, WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX,
             CW_USEDEFAULT, CW_USEDEFAULT, rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, hInstance,
             nullptr);
         // TODO: Change to CreateWindowExW(WS_EX_TOPMOST, L"FrameworkTest_imaseWindowClass", g_szAppName, WS_POPUP,
