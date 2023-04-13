@@ -7,7 +7,8 @@
 #include "DeviceResources.h"
 #include "StepTimer.h"
 #include "ImaseLib/DebugFont.h"
-
+#include "ImaseLib/SceneManager.h"
+#include "UserResources.h"
 
 // A basic game implementation that creates a D3D11 device and
 // provides a game loop.
@@ -87,5 +88,11 @@ private:
 
     // 共通ステート
     std::unique_ptr<DirectX::CommonStates> m_states;
+ 
+    // シーンに渡すユーザーリソースへのポインタ
+    std::unique_ptr<UserResources> m_userResources;
+
+    // シーンマネージャー
+    std::unique_ptr<Imase::SceneManager<UserResources>> m_sceneManager;
 
 };
