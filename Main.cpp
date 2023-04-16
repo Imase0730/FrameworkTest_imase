@@ -63,7 +63,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
     {
         s_fullscreen = false;
     }
-    g_game->SetFullScreenMode(s_fullscreen);
+    g_game->SetFullscreenMode(s_fullscreen);
 
     // Register class and create window
     {
@@ -111,7 +111,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 
     }
 
-    if (s_fullscreen) g_game->ChangeFullscreen(true);
+    //if (s_fullscreen) g_game->ChangeFullscreen(true);
 
     // Main message loop
     MSG msg = {};
@@ -128,7 +128,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
         }
     }
 
-    if (s_fullscreen) g_game->ChangeFullscreen(false);
+    if (s_fullscreen) g_game->QuitFullscreen();
     
     g_game.reset();
 
@@ -177,29 +177,29 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         break;
 
-    //case WM_SIZE:
-    //    if (wParam == SIZE_MINIMIZED)
-    //    {
-    //        if (!s_minimized)
-    //        {
-    //            s_minimized = true;
-    //            if (!s_in_suspend && game)
-    //                game->OnSuspending();
-    //            s_in_suspend = true;
-    //        }
-    //    }
-    //    else if (s_minimized)
-    //    {
-    //        s_minimized = false;
-    //        if (s_in_suspend && game)
-    //            game->OnResuming();
-    //        s_in_suspend = false;
-    //    }
-    //    else if (!s_in_sizemove && game)
-    //    {
-    //        game->OnWindowSizeChanged(LOWORD(lParam), HIWORD(lParam));
-    //    }
-    //    break;
+    case WM_SIZE:
+        //if (wParam == SIZE_MINIMIZED)
+        //{
+        //    if (!s_minimized)
+        //    {
+        //        s_minimized = true;
+        //        if (!s_in_suspend && game)
+        //            game->OnSuspending();
+        //        s_in_suspend = true;
+        //    }
+        //}
+        //else if (s_minimized)
+        //{
+        //    s_minimized = false;
+        //    if (s_in_suspend && game)
+        //        game->OnResuming();
+        //    s_in_suspend = false;
+        //}
+        //else if (!s_in_sizemove && game)
+        //{
+        //    game->OnWindowSizeChanged(LOWORD(lParam), HIWORD(lParam));
+        //}
+        break;
 
     case WM_ENTERSIZEMOVE:
         s_in_sizemove = true;

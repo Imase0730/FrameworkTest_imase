@@ -14,6 +14,15 @@
     <Filter Include="Title">
       <UniqueIdentifier>{32cdb4dd-6222-4545-896d-5a91e9a59e43}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PakPakMonster">
+      <UniqueIdentifier>{3b3daa1a-4413-484f-affa-8aaadedeaa4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PakPakMonster\Textures">
+      <UniqueIdentifier>{d71fc945-48c1-4cd4-a158-2b3be86bc4cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Textures">
+      <UniqueIdentifier>{f9150885-35d2-4292-a6ce-696030224714}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -34,6 +43,24 @@
       <Filter>Title</Filter>
     </ClInclude>
     <ClInclude Include="UserResources.h" />
+    <ClInclude Include="PakPakMonster\PakPakMonster.h">
+      <Filter>PakPakMonster</Filter>
+    </ClInclude>
+    <ClInclude Include="PakPakMonster\Map.h">
+      <Filter>PakPakMonster</Filter>
+    </ClInclude>
+    <ClInclude Include="PakPakMonster\Direction.h">
+      <Filter>PakPakMonster</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>PakPakMonster</Filter>
+    </ClInclude>
+    <ClInclude Include="PakPakMonster\Player.h">
+      <Filter>PakPakMonster</Filter>
+    </ClInclude>
+    <ClInclude Include="PakPakMonster\Monster.h">
+      <Filter>PakPakMonster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -47,6 +74,18 @@
     </ClCompile>
     <ClCompile Include="TitleScene.cpp">
       <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="PakPakMonster\PakPakMonster.cpp">
+      <Filter>PakPakMonster</Filter>
+    </ClCompile>
+    <ClCompile Include="PakPakMonster\Map.cpp">
+      <Filter>PakPakMonster</Filter>
+    </ClCompile>
+    <ClCompile Include="PakPakMonster\Player.cpp">
+      <Filter>PakPakMonster</Filter>
+    </ClCompile>
+    <ClCompile Include="PakPakMonster\Monster.cpp">
+      <Filter>PakPakMonster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -64,5 +103,55 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Textures\bg_01.png">
+      <Filter>PakPakMonster\Textures</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Textures\bg_02.png">
+      <Filter>PakPakMonster\Textures</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Textures\bg_03.png">
+      <Filter>PakPakMonster\Textures</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Textures\food.png">
+      <Filter>PakPakMonster\Textures</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Textures\monster.png">
+      <Filter>PakPakMonster\Textures</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Textures\number.png">
+      <Filter>PakPakMonster\Textures</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Textures\player.png">
+      <Filter>PakPakMonster\Textures</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Textures\result.png">
+      <Filter>PakPakMonster\Textures</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="PakPakMonster\Textures\bg_01.png">
+      <Filter>Textures</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="PakPakMonster\Textures\bg_02.png">
+      <Filter>Textures</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="PakPakMonster\Textures\bg_03.png">
+      <Filter>Textures</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="PakPakMonster\Textures\food.png">
+      <Filter>Textures</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="PakPakMonster\Textures\monster.png">
+      <Filter>Textures</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="PakPakMonster\Textures\number.png">
+      <Filter>Textures</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="PakPakMonster\Textures\player.png">
+      <Filter>Textures</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="PakPakMonster\Textures\result.png">
+      <Filter>Textures</Filter>
+    </ImageContentTask>
   </ItemGroup>
 </Project>

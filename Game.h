@@ -65,14 +65,14 @@ private:
 
 public:
 
-    void SetFullScreenMode(bool value)
+    void SetFullscreenMode(bool value)
     {
-        m_deviceResources->SetFullScreenMode(value);
+        m_deviceResources->SetFullscreenMode(value);
     }
 
-    void ChangeFullscreen(bool value)
+    void QuitFullscreen()
     {
-        m_deviceResources->GetSwapChain()->SetFullscreenState(value, nullptr);
+        m_deviceResources->GetSwapChain()->SetFullscreenState(FALSE, nullptr);
     }
 
 private:

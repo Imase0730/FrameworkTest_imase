@@ -125,7 +125,7 @@ namespace DX
         bool m_fullscreen;
 
     public:
-        void SetFullScreenMode(bool value) { m_fullscreen = value; }
+        void SetFullscreenMode(bool value) { m_fullscreen = value; }
 
     };
 }
