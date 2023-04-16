@@ -52,13 +52,13 @@
     <ClInclude Include="PakPakMonster\Direction.h">
       <Filter>PakPakMonster</Filter>
     </ClInclude>
-    <ClInclude Include="Color.h">
-      <Filter>PakPakMonster</Filter>
-    </ClInclude>
     <ClInclude Include="PakPakMonster\Player.h">
       <Filter>PakPakMonster</Filter>
     </ClInclude>
     <ClInclude Include="PakPakMonster\Monster.h">
+      <Filter>PakPakMonster</Filter>
+    </ClInclude>
+    <ClInclude Include="PakPakMonster\Color.h">
       <Filter>PakPakMonster</Filter>
     </ClInclude>
   </ItemGroup>
