@@ -81,47 +81,52 @@ void Player::Update(Map& map, int* score, bool* eatPowerup)
 		// えさがある？
 		if (food != nullptr && food->state != Map::FoodState::None)
 		{
-			// 前回食べたえさ？
-			if (m_foodX != map_x || m_foodY != map_y)
+			// パワーえさの上？
+			if ( food->state == Map::FoodState::Power_3
+			  || food->state == Map::FoodState::Power_2
+			  || food->state == Map::FoodState::Power_1 )
 			{
-				// 同じ場所のえさは取れないので取った場所を記録しておく
-				m_foodX = map_x;
-				m_foodY = map_y;
-
-				// パワーえさの上？
-				if ( food->state == Map::FoodState::Power_3
-				  || food->state == Map::FoodState::Power_2
-				  || food->state == Map::FoodState::Power_1 )
+				// パワーえさを食べられる状態？
+				if (m_powerupTimer == 0)
 				{
-					// パワーえさを食べられる状態？
-					if (m_powerupTimer == 0)
+					// 同じ場所のえさは取れないので取った場所を記録しておく
+					// ただしパワーえさは食べられる
+					m_foodX = map_x;
+					m_foodY = map_y;
+
+					// パワーえさを食べた
+					*eatPowerup = true;
+
+					// 得点加算
+					*score += SCORE_POWER;
+
+					// パワーアップの時間を設定
+					m_powerupTimer = POWERUP_TIME;
+
+					// えさの状態を変える
+					switch (food->state)
 					{
-						// パワーえさを食べた
-						*eatPowerup = true;
-
-						// 得点加算
-						*score += SCORE_POWER;
-
-						// パワーアップの時間を設定
-						m_powerupTimer = POWERUP_TIME;
-
-						// えさの状態を変える
-						switch (food->state)
-						{
-						case Map::FoodState::Power_3:
-							food->state = Map::FoodState::Power_2;
-							break;
-						case Map::FoodState::Power_2:
-							food->state = Map::FoodState::Power_1;
-							break;
-						case Map::FoodState::Power_1:
-							food->state = Map::FoodState::None;
-							break;
-						}
+					case Map::FoodState::Power_3:
+						food->state = Map::FoodState::Power_2;
+						break;
+					case Map::FoodState::Power_2:
+						food->state = Map::FoodState::Power_1;
+						break;
+					case Map::FoodState::Power_1:
+						food->state = Map::FoodState::None;
+						break;
 					}
 				}
-				else
+			}
+			else
+			{
+				// 前回食べたえさ？
+				if (m_foodX != map_x || m_foodY != map_y)
 				{
+					// 同じ場所のえさは取れないので取った場所を記録しておく
+					m_foodX = map_x;
+					m_foodY = map_y;
+
 					switch (food->state)
 					{
 					case Map::FoodState::Food_3:
