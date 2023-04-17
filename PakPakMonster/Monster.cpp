@@ -1,12 +1,13 @@
 #include "../pch.h"
 #include "Monster.h"
 #include "Direction.h"
+#include "Common.h"
 
 // モンスターのスタート地点
-const int Monster::START_POS[2][2] =
+const int Monster::START_POS[MONSTER_CNT][2] =
 {
-	(3 * Map::CHIP_SIZE) << 4, (2 * Map::CHIP_SIZE + 8) << 4,	// 追いかけモンスター
-	(3 * Map::CHIP_SIZE) << 4, (4 * Map::CHIP_SIZE - 8) << 4,	// 気まぐれモンスター
+	(3 * CHIP_SIZE) << 4, (2 * CHIP_SIZE + 8) << 4,	// 追いかけモンスター
+	(3 * CHIP_SIZE) << 4, (4 * CHIP_SIZE - 8) << 4,	// 気まぐれモンスター
 };
 
 // モンスターの移動速度
@@ -47,13 +48,13 @@ void Monster::Initialize()
 	m_monster[1].type = Type::Type2;
 }
 
-void Monster::Update(Map& map, int stage, int level, int playerX, int playerY)
+void Monster::Update(int stage, int level, int playerX, int playerY)
 {
 	// 移動用マップデータ
-	const int(*moveMap)[Map::MAP_SIZE] = map.GetMoveMap();
+	const int(*moveMap)[MAP_SIZE] = MOVE_MAP;
 
 	// モンスター用移動＆戻り用マップデータ
-	const int(*monsterMap)[Map::MAP_SIZE] = map.GetMonsterMap();
+	const int(*monsterMap)[MAP_SIZE] = MONSTER_MAP;
 
 	for (int i = 0; i < 2; i++)
 	{
@@ -86,16 +87,16 @@ void Monster::Update(Map& map, int stage, int level, int playerX, int playerY)
 		}
 
 		// 方向転換できる場所かチェック！（幅６４ドットのグリッドにぴったりあった場所）
-		if (((m_monster[i].vx == 0) || (m_monster[i].x % (Map::CHIP_SIZE << 4)) < abs(m_monster[i].vx))
-			&& ((m_monster[i].vy == 0) || (m_monster[i].y % (Map::CHIP_SIZE << 4)) < abs(m_monster[i].vy)))
+		if (((m_monster[i].vx == 0) || (m_monster[i].x % (CHIP_SIZE << 4)) < abs(m_monster[i].vx))
+			&& ((m_monster[i].vy == 0) || (m_monster[i].y % (CHIP_SIZE << 4)) < abs(m_monster[i].vy)))
 		{
 			int mx = m_monster[i].x >> 4;
 			int my = m_monster[i].y >> 4;
-			int map_x = mx / Map::CHIP_SIZE;
-			int map_y = my / Map::CHIP_SIZE;
+			int map_x = mx / CHIP_SIZE;
+			int map_y = my / CHIP_SIZE;
 
-			m_monster[i].x = (map_x * Map::CHIP_SIZE) << 4;
-			m_monster[i].y = (map_y * Map::CHIP_SIZE) << 4;
+			m_monster[i].x = (map_x * CHIP_SIZE) << 4;
+			m_monster[i].y = (map_y * CHIP_SIZE) << 4;
 
 			int moveFlag = moveMap[map_y][map_x];
 			int monsterFlag = monsterMap[map_y][map_x];
@@ -319,10 +320,14 @@ int Monster::GetDirCnt(int moveFlag)
 int Monster::ChaseTarget(int moveFlag, int targetX, int targetY)
 {
 	// プレイヤーが４隅のどのエリアにいるか調べ、違うエリアにいる場合はそちらのエリアに移動する
-	int px = (targetX >> 4) / (Map::CHIP_SIZE * 4);
-	int py = (targetY >> 4) / (Map::CHIP_SIZE * 4);
-	int mx = (m_monster[static_cast<int>(Type::Type1)].x >> 4) / (Map::CHIP_SIZE * 4);
-	int my = (m_monster[static_cast<int>(Type::Type1)].y >> 4) / (Map::CHIP_SIZE * 4);
+	int px = targetX / (CHIP_SIZE * 4);
+	int py = targetY / (CHIP_SIZE * 4);
+
+	// モンスターの位置
+	int mx, my;
+	GetPos(static_cast<int>(Type::Type1), &mx, &my);
+	mx = mx / (CHIP_SIZE * 4);
+	my = my / (CHIP_SIZE * 4);
 
 	int move = 0;
 
@@ -365,25 +370,20 @@ void Monster::UpdateAnime()
 	}
 }
 
-Monster::Type Monster::GetMonsterType(int no)
-{
-	return m_monster[no].type;
-}
-
 // モンスターの状態を設定する関数
-void Monster::SetState(int no, Monster::State state)
+void Monster::SetState(int type, Monster::State state)
 {
-	m_monster[no].state = state;
+	m_monster[type].state = state;
 }
 
-Monster::State Monster::GetState(int no)
+Monster::State Monster::GetState(int type)
 {
-	return m_monster[no].state;
+	return m_monster[type].state;
 }
 
-int Monster::GetWeakTime(int no)
+int Monster::GetWeakTime(int type)
 {
-	return m_monster[no].weakTimer;
+	return m_monster[type].weakTimer;
 }
 
 void Monster::WeakMonster()
@@ -393,12 +393,14 @@ void Monster::WeakMonster()
 		if (m_monster[i].state == State::Normal || m_monster[i].state == State::Weak)
 		{
 			m_monster[i].state = State::Weak;
-			m_monster[i].weakTimer = Map::POWERUP_TIME;
+			m_monster[i].weakTimer = POWERUP_TIME;
 		}
 	}
 }
 
-Monster::Anime Monster::GetAnimeNo(int no)
+Monster::Anime Monster::GetAnimeNo(int type)
 {
-	return m_monster[no].animeNo;
+	return m_monster[type].animeNo;
 }
+
+

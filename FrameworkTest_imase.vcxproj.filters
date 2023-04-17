@@ -18,9 +18,6 @@
       <UniqueIdentifier>{3b3daa1a-4413-484f-affa-8aaadedeaa4a}</UniqueIdentifier>
     </Filter>
     <Filter Include="PakPakMonster\Textures">
-      <UniqueIdentifier>{d71fc945-48c1-4cd4-a158-2b3be86bc4cc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Textures">
       <UniqueIdentifier>{f9150885-35d2-4292-a6ce-696030224714}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -59,6 +56,9 @@
       <Filter>PakPakMonster</Filter>
     </ClInclude>
     <ClInclude Include="PakPakMonster\Color.h">
+      <Filter>PakPakMonster</Filter>
+    </ClInclude>
+    <ClInclude Include="PakPakMonster\Common.h">
       <Filter>PakPakMonster</Filter>
     </ClInclude>
   </ItemGroup>
@@ -105,53 +105,29 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ImageContentTask Include="Textures\bg_01.png">
-      <Filter>PakPakMonster\Textures</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Textures\bg_02.png">
-      <Filter>PakPakMonster\Textures</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Textures\bg_03.png">
-      <Filter>PakPakMonster\Textures</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Textures\food.png">
-      <Filter>PakPakMonster\Textures</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Textures\monster.png">
-      <Filter>PakPakMonster\Textures</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Textures\number.png">
-      <Filter>PakPakMonster\Textures</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Textures\player.png">
-      <Filter>PakPakMonster\Textures</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Textures\result.png">
-      <Filter>PakPakMonster\Textures</Filter>
-    </ImageContentTask>
     <ImageContentTask Include="PakPakMonster\Textures\bg_01.png">
-      <Filter>Textures</Filter>
+      <Filter>PakPakMonster\Textures</Filter>
     </ImageContentTask>
     <ImageContentTask Include="PakPakMonster\Textures\bg_02.png">
-      <Filter>Textures</Filter>
+      <Filter>PakPakMonster\Textures</Filter>
     </ImageContentTask>
     <ImageContentTask Include="PakPakMonster\Textures\bg_03.png">
-      <Filter>Textures</Filter>
+      <Filter>PakPakMonster\Textures</Filter>
     </ImageContentTask>
     <ImageContentTask Include="PakPakMonster\Textures\food.png">
-      <Filter>Textures</Filter>
+      <Filter>PakPakMonster\Textures</Filter>
     </ImageContentTask>
     <ImageContentTask Include="PakPakMonster\Textures\monster.png">
-      <Filter>Textures</Filter>
+      <Filter>PakPakMonster\Textures</Filter>
     </ImageContentTask>
     <ImageContentTask Include="PakPakMonster\Textures\number.png">
-      <Filter>Textures</Filter>
+      <Filter>PakPakMonster\Textures</Filter>
     </ImageContentTask>
     <ImageContentTask Include="PakPakMonster\Textures\player.png">
-      <Filter>Textures</Filter>
+      <Filter>PakPakMonster\Textures</Filter>
     </ImageContentTask>
     <ImageContentTask Include="PakPakMonster\Textures\result.png">
-      <Filter>Textures</Filter>
+      <Filter>PakPakMonster\Textures</Filter>
     </ImageContentTask>
   </ItemGroup>
 </Project>

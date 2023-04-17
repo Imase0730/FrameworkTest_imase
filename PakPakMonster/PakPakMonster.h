@@ -2,13 +2,16 @@
 
 #include "ImaseLib/SceneManager.h"
 #include "UserResources.h"
+#include "Common.h"
 #include "Map.h"
 #include "Player.h"
 #include "Monster.h"
 
+// パクパクモンスターのシーンクラス
 class PakPakMonster : public Imase::Scene<UserResources>
 {
 public:
+
 	// コンストラクタ
 	PakPakMonster();
 
@@ -48,46 +51,20 @@ private:
 	std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;
 
 	// テクスチャハンドル
-	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_number;
-	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_result;
-	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_bg01;
-	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_bg02;
-	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_bg03;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_numberTex;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_resultTex;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_bg01Tex;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_bg02Tex;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_bg03Tex;
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_playerTex;
-	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_food;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_foodTex;
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_monsterTex;
 
 	// 射影行列
 	DirectX::SimpleMath::Matrix m_proj;
 
-	// 画面サイズ
-	static const int SCREEN_W = 456;
-	static const int SCREEN_H = 440;
-
-	// 残機数
-	static const int LEVEL1_PLAYER_CNT = 6;
-	static const int LEVEL2_PLAYER_CNT = 3;
-
-	// キャラクターサイズ（５６ドット）
-	static const int CHARACTER_SIZE = 56;
-
-	// ゲームが始まるまでの時間
-	static const int START_WAIT = 90;
-
-	// プレイヤーが死亡した時の待ち時間
-	static const int  PAUSE_TIME_DEAD = (5 * 60);
-
-	// モンスターを食べた時の待ち時間
-	static const int  PAUSE_TIME_EAT = (3 * 60);
-
-	// ステージクリア時の待ち時間
-	static const int  PAUSE_TIME_CLEAR = (3 * 60);
-
-	// ゲームオーバー時の待ち時間
-	static const int  PAUSE_TIME_GAMEOVER = (5 * 60);
-
 	// シーン
-	enum class SCENE
+	enum class GameScene
 	{
 		Title,	// タイトル画面
 		Result,	// 結果画面
@@ -95,7 +72,7 @@ private:
 	};
 
 	// 現在のシーン
-	SCENE m_scene;
+	GameScene m_scene;
 	
 	// スコア
 	int m_score;
@@ -155,11 +132,13 @@ private:
 	// 背景色の変更
 	void SetBgColor(DirectX::SimpleMath::Color color);
 
+
 	// タイトル画面の更新
 	void UpdateTitle();
 
 	// タイトル画面の描画
 	void DrawTitle();
+
 
 	// 結果画面の初期化
 	void InitializeResult();
@@ -170,6 +149,7 @@ private:
 	// 結果画面の描画
 	void DrawResult();
 
+
 	// ゲームの初期化
 	void InitializeGame(bool value);
 
@@ -178,6 +158,7 @@ private:
 
 	// ゲームの描画
 	void DrawGame();
+
 
 	// マップの描画
 	void DrawMap();
@@ -189,10 +170,7 @@ private:
 	void DrawPlayer();
 
 	// 色変換関数
-	DirectX::SimpleMath::Color GetColor(const int *rgb)
-	{
-		return DirectX::SimpleMath::Color(rgb[0] / 255.0f, rgb[1] / 255.0f, rgb[2] / 255.0f, 1.0f);
-	}
+	DirectX::SimpleMath::Color GetColor(const int* rgb);
 
 	// 数字の描画
 	void DrawNumber(int x, int y, int number, int keta, DirectX::SimpleMath::Color color, int dis);
@@ -206,7 +184,13 @@ private:
 	// ゲームオーバー時の処理
 	void GameOver();
 
+	// プレイヤーとモンスターの衝突判定をする関数
 	bool HitCheck(int* type);
 
 };
 
+// 色変換関数
+inline DirectX::SimpleMath::Color PakPakMonster::GetColor(const int* rgb)
+{
+	return DirectX::SimpleMath::Color(rgb[0] / 255.0f, rgb[1] / 255.0f, rgb[2] / 255.0f, 1.0f);
+}

@@ -1,59 +1,9 @@
 #include "../pch.h"
 #include "Map.h"
 #include "Direction.h"
+#include "Common.h"
 
 using namespace DirectX;
-
-// 移動可能マップ
-const int Map::m_moveMap[MAP_SIZE][MAP_SIZE] =
-{
-	DR,  LR,  DL,   0,  DR,  LR, DL,
-	UD,   0, UDR,  LR, UDL,   0, UD,
-	UR, DLR,  UL,  UD,  UR, DLR, UL,
-	 0,  UD,   0,  UD,   0,  UD,  0,
-	DR, ULR,  DL,  UD,  DR, ULR, DL,
-	UD,   0, UDR,  LR, UDL,   0, UD,
-	UR,  LR,  UL,   0,  UR,  LR, UL,
-};
-
-// モンスター用移動＆戻り用マップ
-const int Map::m_monsterMap[MAP_SIZE][MAP_SIZE] =
-{
-	0, 0, 0, 0, 0, 0, 0,
-	0, 0, R, D, L, 0, 0,
-	0, R, 0, 0, 0, L, 0,
-	0, 0, 0, 0, 0, 0, 0,
-	0, U, 0, 0, 0, U, 0,
-	0, 0, U, 0, U, 0, 0,
-	0, 0, 0, 0, 0, 0, 0,
-};
-
-// えさの配置マップ１
-const int Map::m_foodMap1[MAP_SIZE][MAP_SIZE] =
-{
-	2, 0, 0, 0, 0, 0, 1,
-	0, 0, 0, 0, 0, 0, 0,
-	0, 0, 1, 0, 1, 0, 0,
-	0, 0, 0, 0, 0, 0, 0,
-	0, 0, 1, 0, 1, 0, 0,
-	0, 0, 0, 0, 0, 0, 0,
-	1, 0, 0, 0, 0, 0, 1,
-};
-
-// えさの配置マップ２
-const int Map::m_foodMap2[MAP_SIZE][MAP_SIZE] =
-{
-	1, 0, 0, 0, 0, 0, 2,
-	0, 0, 0, 0, 0, 0, 0,
-	0, 0, 1, 0, 1, 0, 0,
-	0, 0, 0, 0, 0, 0, 0,
-	0, 0, 1, 0, 1, 0, 0,
-	0, 0, 0, 0, 0, 0, 0,
-	1, 0, 0, 0, 0, 0, 1,
-};
-
-// ボーナスえさの得点
-const int Map::m_bonusScore[BONUS_KIND_MAX] = { 100, 200, 300, 400, 500, 600, 700, 800 };
 
 // コンストラクタ
 Map::Map()
@@ -68,11 +18,11 @@ void Map::InitializeMap()
 	// ランダムでステージを決める
 	if (rand() % 2)
 	{
-		m_foodMap = m_foodMap1;
+		m_foodMap = FOOD_MAP1;
 	}
 	else
 	{
-		m_foodMap = m_foodMap2;
+		m_foodMap = FOOD_MAP2;
 	}
 }
 
@@ -163,7 +113,7 @@ void Map::Update()
 			}
 			m_bonusInfo.y = 3 * CHIP_SIZE;
 			// ボーナスの得点をランダムで決定
-			m_bonusInfo.score = m_bonusScore[rand() % BONUS_KIND_MAX];
+			m_bonusInfo.score = BONUS_SCORE[rand() % BONUS_KIND_MAX];
 			m_bonusInfo.SetState(BonusState::Display);
 			break;
 		case BonusState::Display:	// ？を消す

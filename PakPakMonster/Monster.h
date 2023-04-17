@@ -1,13 +1,8 @@
 #pragma once
 
-#include "Map.h"
-
 class Monster
 {
 public:
-
-	// モンスターの数
-	static const int MONSTER_CNT = 2;
 
 	enum class Type
 	{
@@ -108,10 +103,7 @@ public:
 	void Initialize();
 
 	// 更新
-	void Update(Map& map, int stage, int level, int playerX, int playerY);
-
-	// 描画
-	void Draw();
+	void Update(int stage, int level, int playerX, int playerY);
 
 	// モンスターが食べられたり、復活するときの絵のパターンチェンジする関数
 	bool ChangeBody(int type, int stage, int level);
@@ -122,31 +114,29 @@ public:
 	// アニメーションの更新関数
 	void UpdateAnime();
 
-	// モンスターのタイプを取得する関数
-	Monster::Type GetMonsterType(int no);
-
 	// モンスターの状態を設定する関数
-	void SetState(int no, Monster::State state);
+	void SetState(int type, Monster::State state);
 
 	// モンスターの状態を取得する関数
-	Monster::State GetState(int no);
+	Monster::State GetState(int type);
 
 	// モンスターの弱っている時間の残り時間を取得する関数
-	int GetWeakTime(int no);
+	int GetWeakTime(int type);
 
 	// アニメーションの番号を取得関数
-	Monster::Anime GetAnimeNo(int no);
+	Monster::Anime GetAnimeNo(int type);
 	
 	// 位置を取得する関数
-	void GetPos(int no, int* x, int* y)
-	{
-		// 8ドット単位の移動にする
-		*x = (m_monster[no].x >> 7) << 3;
-		*y = (m_monster[no].y >> 7) << 3;
-	}
+	void GetPos(int type, int* x, int* y);
 
 	// モンスターが弱くなる関数
 	void WeakMonster();
 
 };
 
+inline void Monster::GetPos(int type, int* x, int* y)
+{
+	// 8ドット単位の移動にする
+	*x = (m_monster[type].x >> 7) << 3;
+	*y = (m_monster[type].y >> 7) << 3;
+}

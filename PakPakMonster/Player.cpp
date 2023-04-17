@@ -1,6 +1,7 @@
 #include "../pch.h"
 #include "Player.h"
 #include "Direction.h"
+#include "Common.h"
 
 using namespace DirectX;
 
@@ -22,8 +23,8 @@ Player::Player()
 void Player::Initialize()
 {
 	m_state = PlayerState::Stop;
-	m_x = (3 * Map::CHIP_SIZE) << 4;
-	m_y = (5 * Map::CHIP_SIZE) << 4;
+	m_x = (3 * CHIP_SIZE) << 4;
+	m_y = (5 * CHIP_SIZE) << 4;
 	m_dir = RIGHT;
 	SetVelocity();
 	m_left = false;	// 右向き
@@ -39,7 +40,7 @@ void Player::Update(Map& map, int* score, bool* eatPowerup)
 	auto key = Keyboard::Get().GetState();
 
 	// 移動用マップデータ
-	const int (*moveMap)[Map::MAP_SIZE] = map.GetMoveMap();
+	const int (*moveMap)[MAP_SIZE] = MOVE_MAP;
 
 	// まだパワーえさを食べていない
 	*eatPowerup = false;
@@ -53,13 +54,13 @@ void Player::Update(Map& map, int* score, bool* eatPowerup)
 	m_y += m_vy;
 
 	// 方向転換できる場所かチェック！（幅６４ドットのグリッドにぴったりあった場所）
-	if (((m_vx == 0) || (m_x % (Map::CHIP_SIZE << 4)) < abs(m_vx))
-		&& ((m_vy == 0) || (m_y % (Map::CHIP_SIZE << 4)) < abs(m_vy)))
+	if (((m_vx == 0) || (m_x % (CHIP_SIZE << 4)) < abs(m_vx))
+		&& ((m_vy == 0) || (m_y % (CHIP_SIZE << 4)) < abs(m_vy)))
 	{
 		int px = m_x >> 4;
 		int py = m_y >> 4;
-		int map_x = px / Map::CHIP_SIZE;
-		int map_y = py / Map::CHIP_SIZE;
+		int map_x = px / CHIP_SIZE;
+		int map_y = py / CHIP_SIZE;
 		int moveFlag = moveMap[map_y][map_x];
 
 		// 進行方向が移動不可なら止める
@@ -102,7 +103,7 @@ void Player::Update(Map& map, int* score, bool* eatPowerup)
 						*score += SCORE_POWER;
 
 						// パワーアップの時間を設定
-						m_powerupTimer = Map::POWERUP_TIME;
+						m_powerupTimer = POWERUP_TIME;
 
 						// えさの状態を変える
 						switch (food->state)
@@ -150,7 +151,7 @@ void Player::Update(Map& map, int* score, bool* eatPowerup)
 		// ？取得をチェック
 		Map::BonusInfo* bonus = map.GetBonusInfo();
 		if ( (map_x == 1 || map_x == 5) && (map_y == 3)	// ？の位置にいる
-		   && map_x == (bonus->x / Map::CHIP_SIZE)		// ？がある
+		   && map_x == (bonus->x / CHIP_SIZE)		// ？がある
 		   && bonus->state == Map::BonusState::Display)	// ？が取得できる状態
 		{
 			bonus->SetState(Map::BonusState::Score);

@@ -95,3 +95,4 @@ namespace DX
 #include "VertexTypes.h"
 #include "SpriteBatch.h"
 #include "Effects.h"
+

@@ -4,13 +4,6 @@
 
 class Player
 {
-public:
-
-	// 得点
-	static const int SCORE_FOOD = 20;
-	static const int SCORE_POWER = 100;
-	static const int SCORE_MONSTER = 100;
-
 private:
 
 	// プレイヤーの速さ
@@ -91,12 +84,7 @@ public:
 	int GetAnimeId() { return m_animeId; }
 
 	// プレイヤーの位置を取得する関数
-	void GetPlayerPos(int* x, int* y)
-	{
-		// 8ドット単位の移動にする
-		*x = (m_x >> 7) << 3;
-		*y = (m_y >> 7) << 3;
-	}
+	void GetPos(int* x, int* y);
 
 	// 左向きか調べる関数
 	bool IsLeft() { return m_left; }
@@ -105,11 +93,21 @@ public:
 	void UpdateAnime();
 
 	// パワーアップ中か調べる関数
-	bool IsPowerup()
-	{
-		if (m_powerupTimer == 0) return false;
-		return true;
-	}
+	bool IsPowerup();
 
 };
 
+// プレイヤーの位置を取得する関数
+inline void Player::GetPos(int* x, int* y)
+{
+	// 8ドット単位の移動にする
+	*x = (m_x >> 7) << 3;
+	*y = (m_y >> 7) << 3;
+}
+
+// パワーアップ中か調べる関数
+inline bool Player::IsPowerup()
+{
+	if (m_powerupTimer == 0) return false;
+	return true;
+}

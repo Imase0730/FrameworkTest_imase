@@ -184,6 +184,7 @@
     <ClInclude Include="ImaseLib\DebugFont.h" />
     <ClInclude Include="ImaseLib\SceneManager.h" />
     <ClInclude Include="PakPakMonster\Color.h" />
+    <ClInclude Include="PakPakMonster\Common.h" />
     <ClInclude Include="PakPakMonster\Direction.h" />
     <ClInclude Include="PakPakMonster\Map.h" />
     <ClInclude Include="PakPakMonster\Monster.h" />
@@ -274,62 +275,6 @@
       <GenerateMips Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</GenerateMips>
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources/Textures/%(Filename).dds</ContentOutput>
     </ImageContentTask>
-    <ImageContentTask Include="Textures\bg_01.png">
-      <Compress Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">BC3_UNORM</Compress>
-      <GeneratePremultipliedAlpha Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GeneratePremultipliedAlpha>
-      <GenerateMips Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</GenerateMips>
-      <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources/Textures/%(Filename).dds</ContentOutput>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ImageContentTask>
-    <ImageContentTask Include="Textures\bg_02.png">
-      <Compress Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">BC3_UNORM</Compress>
-      <GeneratePremultipliedAlpha Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GeneratePremultipliedAlpha>
-      <GenerateMips Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</GenerateMips>
-      <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources/Textures/%(Filename).dds</ContentOutput>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ImageContentTask>
-    <ImageContentTask Include="Textures\bg_03.png">
-      <Compress Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">BC3_UNORM</Compress>
-      <GeneratePremultipliedAlpha Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GeneratePremultipliedAlpha>
-      <GenerateMips Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</GenerateMips>
-      <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources/Textures/%(Filename).dds</ContentOutput>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ImageContentTask>
-    <ImageContentTask Include="Textures\food.png">
-      <Compress Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">BC3_UNORM</Compress>
-      <GeneratePremultipliedAlpha Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GeneratePremultipliedAlpha>
-      <GenerateMips Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</GenerateMips>
-      <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources/Textures/%(Filename).dds</ContentOutput>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ImageContentTask>
-    <ImageContentTask Include="Textures\monster.png">
-      <Compress Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">BC3_UNORM</Compress>
-      <GeneratePremultipliedAlpha Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GeneratePremultipliedAlpha>
-      <GenerateMips Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</GenerateMips>
-      <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources/Textures/%(Filename).dds</ContentOutput>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ImageContentTask>
-    <ImageContentTask Include="Textures\number.png">
-      <Compress Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">BC3_UNORM</Compress>
-      <GeneratePremultipliedAlpha Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GeneratePremultipliedAlpha>
-      <GenerateMips Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</GenerateMips>
-      <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources/Textures/%(Filename).dds</ContentOutput>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ImageContentTask>
-    <ImageContentTask Include="Textures\player.png">
-      <Compress Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">BC3_UNORM</Compress>
-      <GeneratePremultipliedAlpha Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GeneratePremultipliedAlpha>
-      <GenerateMips Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</GenerateMips>
-      <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources/Textures/%(Filename).dds</ContentOutput>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ImageContentTask>
-    <ImageContentTask Include="Textures\result.png">
-      <Compress Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">BC3_UNORM</Compress>
-      <GeneratePremultipliedAlpha Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GeneratePremultipliedAlpha>
-      <GenerateMips Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</GenerateMips>
-      <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources/Textures/%(Filename).dds</ContentOutput>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="settings.manifest" />
@@ -340,8 +285,8 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="packages\Microsoft.XAudio2.Redist.1.2.11\build\native\Microsoft.XAudio2.Redist.targets" Condition="Exists('packages\Microsoft.XAudio2.Redist.1.2.11\build\native\Microsoft.XAudio2.Redist.targets')" />
-    <Import Project="packages\directxtk_desktop_2019.2023.3.30.1\build\native\directxtk_desktop_2019.targets" Condition="Exists('packages\directxtk_desktop_2019.2023.3.30.1\build\native\directxtk_desktop_2019.targets')" />
     <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.targets" />
+    <Import Project="packages\directxtk_desktop_2019.2023.3.30.1\build\native\directxtk_desktop_2019.targets" Condition="Exists('packages\directxtk_desktop_2019.2023.3.30.1\build\native\directxtk_desktop_2019.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
