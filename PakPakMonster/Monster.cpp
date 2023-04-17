@@ -11,6 +11,8 @@
 #include "Direction.h"
 #include "Common.h"
 
+using namespace PakPakMonster;
+
 // モンスターのスタート地点
 const int Monster::START_POS[MONSTER_CNT][2] =
 {

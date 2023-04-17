@@ -7,15 +7,16 @@
 // Author: Hideyasu Imase
 //--------------------------------------------------------------------------------------
 #include "../pch.h"
-#include "PakPakMonster.h"
+#include "GameScene.h"
 #include "Color.h"
 #include "TitleScene.h"
 
 using namespace DirectX;
+using namespace PakPakMonster;
 
 // コンストラクタ
-PakPakMonster::PakPakMonster()
-	: m_scene(GameScene::Title)
+GameScene::GameScene()
+	: m_scene(Scene::Title)
 	, m_bgColor{}
 	, m_score(0)
 	, m_highscore{}
@@ -31,7 +32,7 @@ PakPakMonster::PakPakMonster()
 }
 
 // シーンの初期化
-void PakPakMonster::Initialize()
+void GameScene::Initialize()
 {
 	CreateDeviceDependentResources();
 	CreateWindowSizeDependentResources();
@@ -40,7 +41,7 @@ void PakPakMonster::Initialize()
 	m_rest = LEVEL1_PLAYER_CNT;				// 残機数
 	m_score = 0;							// 得点
 	m_highscore[0] = m_highscore[1] = 0;	// ハイスコア
-	m_scene = GameScene::Title;				// タイトル画面
+	m_scene = Scene::Title;					// タイトル画面
 	m_level = 0;							// ゲームモード（簡単）
 
 	// 背景色（黒）
@@ -48,7 +49,7 @@ void PakPakMonster::Initialize()
 }
 
 // シーンの更新
-void PakPakMonster::Update(float elapsedTime)
+void GameScene::Update(float elapsedTime)
 {
 	UNREFERENCED_PARAMETER(elapsedTime);
 
@@ -60,13 +61,13 @@ void PakPakMonster::Update(float elapsedTime)
 
 	switch (m_scene)
 	{
-	case GameScene::Title:	// タイトル画面
+	case Scene::Title:	// タイトル画面
 		UpdateTitle();
 		break;
-	case GameScene::Result:	// 結果画面
+	case Scene::Result:	// 結果画面
 		UpdateResult();
 		break;
-	case GameScene::Game:	// ゲーム中
+	case Scene::Game:	// ゲーム中
 		UpdateGame();
 		break;
 	default:
@@ -75,10 +76,11 @@ void PakPakMonster::Update(float elapsedTime)
 }
 
 // シーンの描画
-void PakPakMonster::Render()
+void GameScene::Render()
 {
 	auto* debugFont = GetUserResources()->GetDebugFont();
 	debugFont->AddString(L"PakPakMonster", SimpleMath::Vector2(0.0f, debugFont->GetFontHeight()));
+	debugFont->AddString(L"Z:Start X:Level", SimpleMath::Vector2(0.0f, debugFont->GetFontHeight() * 2));
 
 	auto context = GetUserResources()->GetDeviceResources()->GetD3DDeviceContext();
 
@@ -95,13 +97,13 @@ void PakPakMonster::Render()
 
 	switch (m_scene)
 	{
-	case GameScene::Title:	// タイトル画面
+	case Scene::Title:	// タイトル画面
 		DrawTitle();
 		break;
-	case GameScene::Result:	// 結果画面
+	case Scene::Result:	// 結果画面
 		DrawResult();
 		break;
-	case GameScene::Game:	// ゲーム中
+	case Scene::Game:	// ゲーム中
 		DrawGame();
 		break;
 	default:
@@ -115,7 +117,8 @@ void PakPakMonster::Render()
 	context->RSSetViewports(1, &viewport);
 }
 
-void PakPakMonster::Finalize()
+// 終了処理
+void GameScene::Finalize()
 {
 	// テクスチャを解放
 	m_monsterTex.Reset();
@@ -132,14 +135,11 @@ void PakPakMonster::Finalize()
 	m_basicEffect.reset();
 }
 
-void PakPakMonster::CreateDeviceDependentResources()
+// デバイスに依存するリソースを作成する関数
+void GameScene::CreateDeviceDependentResources()
 {
 	auto device = GetUserResources()->GetDeviceResources()->GetD3DDevice();
 	auto context = GetUserResources()->GetDeviceResources()->GetD3DDeviceContext();
-
-	//// レンダリングテクスチャの作成
-	//m_renderTexture = std::make_unique<DX::RenderTexture>(GetUserResources()->GetDeviceResources()->GetBackBufferFormat());
-	//m_renderTexture->SetDevice(device);
 
 	// ベーシックエフェクト
 	m_basicEffect = std::make_unique<BasicEffect>(device);
@@ -169,7 +169,8 @@ void PakPakMonster::CreateDeviceDependentResources()
 	DX::ThrowIfFailed(CreateDDSTextureFromFile(device, L"Resources/Textures/monster.dds", nullptr, m_monsterTex.ReleaseAndGetAddressOf()));
 }
 
-void PakPakMonster::CreateWindowSizeDependentResources()
+// ウインドウサイズに依存するリソースを作成する関数
+void GameScene::CreateWindowSizeDependentResources()
 {
 	// 画面サイズを取得
 	RECT rect = GetUserResources()->GetDeviceResources()->GetOutputSize();
@@ -179,13 +180,14 @@ void PakPakMonster::CreateWindowSizeDependentResources()
 		0.0f, static_cast<float>(rect.right), static_cast<float>(rect.bottom), 0.0f, 0.0f, 1.0f);
 }
 
-void PakPakMonster::OnDeviceLost()
+// デバイスロストした時に呼び出される関数
+void GameScene::OnDeviceLost()
 {
 	Finalize();
 }
 
 // 背景色の描画
-void PakPakMonster::SetBgColor(DirectX::SimpleMath::Color color)
+void GameScene::SetBgColor(DirectX::SimpleMath::Color color)
 {
 	auto context = GetUserResources()->GetDeviceResources()->GetD3DDeviceContext();
 	auto states = GetUserResources()->GetCommonStates();
@@ -218,7 +220,7 @@ void PakPakMonster::SetBgColor(DirectX::SimpleMath::Color color)
 }
 
 // 数字の描画
-void PakPakMonster::DrawNumber(int x, int y, int number, int keta, DirectX::SimpleMath::Color color, int dis)
+void GameScene::DrawNumber(int x, int y, int number, int keta, DirectX::SimpleMath::Color color, int dis)
 {
 	int max = 1;
 
@@ -244,7 +246,8 @@ void PakPakMonster::DrawNumber(int x, int y, int number, int keta, DirectX::Simp
 	}
 }
 
-bool PakPakMonster::Pause()
+// ゲームが停止した時の処理
+bool GameScene::Pause()
 {
 	if (m_pauseReason == PauseReason::None) return false;
 
@@ -277,7 +280,7 @@ bool PakPakMonster::Pause()
 			m_pauseReason = PauseReason::None;
 			m_stage++;
 			m_map.InitiaizeFood();
-			m_scene = GameScene::Result;
+			m_scene = Scene::Result;
 			InitializeResult();
 		}
 		break;
@@ -292,7 +295,7 @@ bool PakPakMonster::Pause()
 }
 
 // タイトル画面の更新
-void PakPakMonster::UpdateTitle()
+void GameScene::UpdateTitle()
 {
 	auto tracker = GetUserResources()->GetKeyboardStateTracker();
 
@@ -300,10 +303,11 @@ void PakPakMonster::UpdateTitle()
 	if (tracker->pressed.Z)
 	{
 		// ゲームへ
-		m_scene = GameScene::Game;
+		m_scene = Scene::Game;
 		// ゲーム開始時の初期化
 		InitializeGame(true);
 	}
+
 	// Xキーで難易度変更 
 	if (tracker->pressed.X)
 	{
@@ -321,7 +325,7 @@ void PakPakMonster::UpdateTitle()
 }
 
 // タイトル画面の描画
-void PakPakMonster::DrawTitle()
+void GameScene::DrawTitle()
 {
 	// 背景の描画
 	m_spriteBatch->Draw(m_resultTex.Get(), SimpleMath::Vector2(0.0f, 0.0f));
@@ -336,7 +340,7 @@ void PakPakMonster::DrawTitle()
 	DrawNumber(8 * 16, 15 * 16 + 4, m_highscore[m_level], 5, GetColor(s_color[COLOR_GRAY]), 8);
 }
 
-void PakPakMonster::InitializeResult()
+void GameScene::InitializeResult()
 {
 	// 背景色（黒）
 	m_bgColor = GetColor(s_color[COLOR_BLACK]);
@@ -346,7 +350,7 @@ void PakPakMonster::InitializeResult()
 }
 
 // 結果画面の更新
-void PakPakMonster::UpdateResult()
+void GameScene::UpdateResult()
 {
 	// タイマーが０になったらゲーム画面へ
 	if (m_timer > 0)
@@ -356,14 +360,14 @@ void PakPakMonster::UpdateResult()
 	else
 	{
 		// 次のステージへ
-		m_scene = GameScene::Game;
+		m_scene = Scene::Game;
 		// ゲームの初期化
 		InitializeGame(false);
 	}
 }
 
 // 結果画面の描画
-void PakPakMonster::DrawResult()
+void GameScene::DrawResult()
 {
 	// 背景の描画
 	m_spriteBatch->Draw(m_resultTex.Get(), SimpleMath::Vector2(0.0f, 0.0f));
@@ -379,7 +383,7 @@ void PakPakMonster::DrawResult()
 }
 
 // ゲームの初期化
-void PakPakMonster::InitializeGame(bool value)
+void GameScene::InitializeGame(bool value)
 {
 	// 背景色（黒）
 	m_bgColor = GetColor(s_color[COLOR_BLACK]);
@@ -415,7 +419,7 @@ void PakPakMonster::InitializeGame(bool value)
 }
 
 // ゲームの更新
-void PakPakMonster::UpdateGame()
+void GameScene::UpdateGame()
 {
 	// 画面が止まった時の処理
 	if (Pause()) return;
@@ -476,7 +480,7 @@ void PakPakMonster::UpdateGame()
 }
 
 // ゲームの描画
-void PakPakMonster::DrawGame()
+void GameScene::DrawGame()
 {
 	// マップの描画
 	DrawMap();
@@ -507,7 +511,7 @@ void PakPakMonster::DrawGame()
 }
 
 // マップの描画
-void PakPakMonster::DrawMap()
+void GameScene::DrawMap()
 {
 	// ステージの色
 	int stage_color[] = { COLOR_GREEN, COLOR_CYAN, COLOR_BLACK };
@@ -552,7 +556,7 @@ void PakPakMonster::DrawMap()
 		color = food_color[static_cast<int>(food->state)];
 
 		// えさの矩形
-		RECT srcRect = { 0, 0, 56, 56 };
+		RECT srcRect = { 0, 0, CHARACTER_SIZE, CHARACTER_SIZE };
 
 		switch (food->state)
 		{
@@ -566,8 +570,8 @@ void PakPakMonster::DrawMap()
 		case Map::FoodState::Power_3:
 		case Map::FoodState::Power_2:
 		case Map::FoodState::Power_1:
-			srcRect.left += 56;
-			srcRect.right += 56;
+			srcRect.left += CHARACTER_SIZE;
+			srcRect.right += CHARACTER_SIZE;
 			m_spriteBatch->Draw(m_foodTex.Get(), SimpleMath::Vector2(x, y), &srcRect, SimpleMath::Color(GetColor(s_color[color])));
 			break;
 		}
@@ -579,7 +583,7 @@ void PakPakMonster::DrawMap()
 	if (bonus->state == Map::BonusState::Display)
 	{
 		// えさの矩形
-		RECT srcRect = { 56 * 2, 0, 56 * 3, 56 };
+		RECT srcRect = { CHARACTER_SIZE * 2, 0, CHARACTER_SIZE * 3, CHARACTER_SIZE };
 		// 色はチカチカさせる
 		static int blinkColor = 0;
 		blinkColor = (blinkColor + 1) % (COLOR_MAX - 1);
@@ -596,7 +600,7 @@ void PakPakMonster::DrawMap()
 }
 
 // モンスターの描画
-void PakPakMonster::DrawMonster()
+void GameScene::DrawMonster()
 {
 	m_monster.UpdateAnime();
 
@@ -637,13 +641,13 @@ void PakPakMonster::DrawMonster()
 		m_monster.GetPos(i, &x, &y);
 		SimpleMath::Vector2 pos(static_cast<float>(x + 8), static_cast<float>(y));
 		int id = static_cast<int>(m_monster.GetAnimeNo(i));
-		RECT srcRect = { id * 56, anime_y * 56, (id + 1) * 56, (anime_y + 1) * 56 };
+		RECT srcRect = { id * CHARACTER_SIZE, anime_y * CHARACTER_SIZE, (id + 1) * CHARACTER_SIZE, (anime_y + 1) * CHARACTER_SIZE };
 		m_spriteBatch->Draw(m_monsterTex.Get(), pos, &srcRect, color);
 	}
 }
 
 // プレイヤーの描画
-void PakPakMonster::DrawPlayer()
+void GameScene::DrawPlayer()
 {
 	// アニメーションの更新
 	m_player.UpdateAnime();
@@ -660,7 +664,7 @@ void PakPakMonster::DrawPlayer()
 	SimpleMath::Vector2 pos(static_cast<float>(x + 8), static_cast<float>(y));
 
 	// 切り出し矩形
-	RECT srcRect = { id * 56, 0, (id + 1) * 56, 56};
+	RECT srcRect = { id * CHARACTER_SIZE, 0, (id + 1) * CHARACTER_SIZE, CHARACTER_SIZE };
 	// 左向きなら左右反転する
 	SpriteEffects flip = SpriteEffects_None;
 	if (m_player.IsLeft()) flip = SpriteEffects_FlipHorizontally;
@@ -668,7 +672,7 @@ void PakPakMonster::DrawPlayer()
 }
 
 // プレイヤーが死んだ時の処理
-void PakPakMonster::DeadPlayer()
+void GameScene::DeadPlayer()
 {
 	if (m_pauseTimer == 0)
 	{
@@ -683,19 +687,19 @@ void PakPakMonster::DeadPlayer()
 		else
 		{
 			// 結果画面へ
-			m_scene = GameScene::Result;
+			m_scene = Scene::Result;
 			InitializeResult();
 		}
 	}
 }
 
 // ゲームオーバー時の処理
-void PakPakMonster::GameOver()
+void GameScene::GameOver()
 {
 	if (m_pauseTimer == 0)
 	{
 		// タイトルへ
-		m_scene = GameScene::Title;
+		m_scene = Scene::Title;
 
 		// ハイスコアの更新
 		if (m_highscore[m_level] < m_score) m_highscore[m_level] = m_score;
@@ -727,23 +731,27 @@ void PakPakMonster::GameOver()
 }
 
 // プレイヤーとモンスターの衝突判定をする関数
-bool PakPakMonster::HitCheck(int* type)
+bool GameScene::HitCheck(int* type)
 {
 	int px, py;
 	int mx, my;
 
 	// プレイヤーの位置を取得
 	m_player.GetPos(&px, &py);
+
 	for (int i = 0; i < MONSTER_CNT; i++)
 	{
 		// モンスターの位置を取得
 		m_monster.GetPos(i, &mx, &my);
-		if ( px + COLLISION_SPACE < mx + CHARACTER_SIZE - COLLISION_SPACE && mx + 8 < px + CHARACTER_SIZE - COLLISION_SPACE
-		  && py + COLLISION_SPACE < my + CHARACTER_SIZE - COLLISION_SPACE && my + 8 < py + CHARACTER_SIZE - COLLISION_SPACE )
+		if ( px + COLLISION_SPACE < mx + CHARACTER_SIZE - COLLISION_SPACE
+		  && mx + COLLISION_SPACE < px + CHARACTER_SIZE - COLLISION_SPACE
+		  && py + COLLISION_SPACE < my + CHARACTER_SIZE - COLLISION_SPACE
+		  && my + COLLISION_SPACE < py + CHARACTER_SIZE - COLLISION_SPACE )
 		{
 			*type = i;
 			return true;
 		}
 	}
+
 	return false;
 }

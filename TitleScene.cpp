@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "TitleScene.h"
-#include "PakPakMonster/PakPakMonster.h"
+#include "PakPakMonster/GameScene.h"
 
 using namespace DirectX;
 
@@ -15,7 +15,7 @@ void TitleScene::Update(float elapsedTime)
 	auto key = GetUserResources()->GetKeyboardStateTracker();
 	if (key->pressed.A)
 	{
-		ChangeScene<PakPakMonster>();
+		ChangeScene<PakPakMonster::GameScene>();
 	}
 
 }

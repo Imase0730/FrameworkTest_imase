@@ -40,7 +40,7 @@
       <Filter>Title</Filter>
     </ClInclude>
     <ClInclude Include="UserResources.h" />
-    <ClInclude Include="PakPakMonster\PakPakMonster.h">
+    <ClInclude Include="PakPakMonster\GameScene.h">
       <Filter>PakPakMonster</Filter>
     </ClInclude>
     <ClInclude Include="PakPakMonster\Map.h">
@@ -75,7 +75,7 @@
     <ClCompile Include="TitleScene.cpp">
       <Filter>Title</Filter>
     </ClCompile>
-    <ClCompile Include="PakPakMonster\PakPakMonster.cpp">
+    <ClCompile Include="PakPakMonster\GameScene.cpp">
       <Filter>PakPakMonster</Filter>
     </ClCompile>
     <ClCompile Include="PakPakMonster\Map.cpp">

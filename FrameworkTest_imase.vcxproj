@@ -188,7 +188,7 @@
     <ClInclude Include="PakPakMonster\Direction.h" />
     <ClInclude Include="PakPakMonster\Map.h" />
     <ClInclude Include="PakPakMonster\Monster.h" />
-    <ClInclude Include="PakPakMonster\PakPakMonster.h" />
+    <ClInclude Include="PakPakMonster\GameScene.h" />
     <ClInclude Include="PakPakMonster\Player.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="StepTimer.h" />
@@ -211,7 +211,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../pch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="PakPakMonster\PakPakMonster.cpp">
+    <ClCompile Include="PakPakMonster\GameScene.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../pch.h</PrecompiledHeaderFile>
     </ClCompile>

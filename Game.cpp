@@ -5,8 +5,7 @@
 #include "pch.h"
 #include "Game.h"
 #include "TitleScene.h"
-#include "PakPakMonster/PakPakMonster.h"
-#include "Game.h"
+#include "PakPakMonster/GameSCene.h"
 
 extern void ExitGame() noexcept;
 
@@ -41,7 +40,7 @@ void Game::Initialize(HWND window, int width, int height)
     m_timer.SetTargetElapsedSeconds(1.0 / 60);
 
     // ‹N“®ƒV[ƒ“‚ÌÝ’è
-    m_sceneManager->SetScene<PakPakMonster>();
+    m_sceneManager->SetScene<PakPakMonster::GameScene>();
 
 }
 

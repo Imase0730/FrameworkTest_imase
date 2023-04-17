@@ -8,7 +8,9 @@
 //--------------------------------------------------------------------------------------
 #pragma once
 
-// ˆÚ“®•ûŒü
+namespace PakPakMonster
+{
+	// ˆÚ“®•ûŒü
 #define UP    (1 << 0)
 #define DOWN  (1 << 1)
 #define LEFT  (1 << 2)
@@ -30,3 +32,5 @@
 #define ULR (U | L | R)
 #define DLR (D | L | R)
 #define UDLR (U | D | L | R)
+}
+

@@ -12,6 +12,7 @@
 #include "Common.h"
 
 using namespace DirectX;
+using namespace PakPakMonster;
 
 // コンストラクタ
 Player::Player()
