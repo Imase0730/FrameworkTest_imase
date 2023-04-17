@@ -111,8 +111,6 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 
     }
 
-    //if (s_fullscreen) g_game->ChangeFullscreen(true);
-
     // Main message loop
     MSG msg = {};
     while (WM_QUIT != msg.message)
