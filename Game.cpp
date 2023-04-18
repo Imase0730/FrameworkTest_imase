@@ -14,6 +14,7 @@ using namespace DirectX;
 using Microsoft::WRL::ComPtr;
 
 Game::Game() noexcept(false)
+    : m_fullscreen(false)
 {
     m_deviceResources = std::make_unique<DX::DeviceResources>();
     // TODO: Provide parameters for swapchain format, depth/stencil format, and backbuffer count.
@@ -139,7 +140,6 @@ void Game::Clear()
 void Game::OnActivated()
 {
     // TODO: Game is becoming active window.
-
 }
 
 void Game::OnDeactivated()
@@ -150,7 +150,6 @@ void Game::OnDeactivated()
 void Game::OnSuspending()
 {
     // TODO: Game is being power-suspended (or minimized).
-
 }
 
 void Game::OnResuming()
@@ -164,14 +163,29 @@ void Game::OnResuming()
 void Game::OnWindowMoved()
 {
     auto const r = m_deviceResources->GetOutputSize();
-    m_deviceResources->WindowSizeChanged(r.right, r.bottom);
 
+    // スリープなどによって解像度が変わってしまった時の処理
+    if (m_fullscreen)
+    {
+        // 画面の解像度を取得
+        int w = GetSystemMetrics(SM_CXSCREEN);
+        int h = GetSystemMetrics(SM_CYSCREEN);
+
+        // フルスクリーンが解除された？
+        if (r.right != w || r.bottom != h)
+        {
+            m_fullscreen = false;
+            // ResizeBuffers関数を呼び出す
+            m_deviceResources->CreateWindowSizeDependentResources();
+        }
+    }
+
+    m_deviceResources->WindowSizeChanged(r.right, r.bottom);
 }
 
 void Game::OnDisplayChange()
 {
     m_deviceResources->UpdateColorSpace();
-
 }
 
 void Game::OnWindowSizeChanged(int width, int height)

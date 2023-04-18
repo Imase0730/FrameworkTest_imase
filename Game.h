@@ -65,10 +65,13 @@ private:
     // Rendering loop timer.
     DX::StepTimer                           m_timer;
 
+    bool m_fullscreen;
+
 public:
 
     void SetFullscreenState(bool value)
     {
+        m_fullscreen = value;
         if (value)
         {
             m_deviceResources->GetSwapChain()->SetFullscreenState(TRUE, nullptr);

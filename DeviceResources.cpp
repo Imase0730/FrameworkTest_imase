@@ -403,13 +403,13 @@ bool DeviceResources::WindowSizeChanged(int width, int height)
     newRc.left = newRc.top = 0;
     newRc.right = width;
     newRc.bottom = height;
-    //if (m_outputSize.right == width && m_outputSize.bottom == height)
-    //{
-    //    // Handle color space settings for HDR
-    //    UpdateColorSpace();
+    if (m_outputSize.right == width && m_outputSize.bottom == height)
+    {
+        // Handle color space settings for HDR
+        UpdateColorSpace();
 
-    //    return false;
-    //}
+        return false;
+    }
 
     m_outputSize = newRc;
     CreateWindowSizeDependentResources();
