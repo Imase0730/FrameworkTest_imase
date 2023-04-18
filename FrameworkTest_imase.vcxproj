@@ -237,48 +237,56 @@
       <GeneratePremultipliedAlpha Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GeneratePremultipliedAlpha>
       <GenerateMips Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</GenerateMips>
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources/Textures/%(Filename).dds</ContentOutput>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ImageContentTask>
     <ImageContentTask Include="PakPakMonster\Textures\bg_02.png">
       <Compress Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">None</Compress>
       <GeneratePremultipliedAlpha Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GeneratePremultipliedAlpha>
       <GenerateMips Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</GenerateMips>
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources/Textures/%(Filename).dds</ContentOutput>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ImageContentTask>
     <ImageContentTask Include="PakPakMonster\Textures\bg_03.png">
       <Compress Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">None</Compress>
       <GeneratePremultipliedAlpha Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GeneratePremultipliedAlpha>
       <GenerateMips Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</GenerateMips>
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources/Textures/%(Filename).dds</ContentOutput>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ImageContentTask>
     <ImageContentTask Include="PakPakMonster\Textures\food.png">
       <Compress Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">None</Compress>
       <GeneratePremultipliedAlpha Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GeneratePremultipliedAlpha>
       <GenerateMips Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</GenerateMips>
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources/Textures/%(Filename).dds</ContentOutput>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ImageContentTask>
     <ImageContentTask Include="PakPakMonster\Textures\monster.png">
       <Compress Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">None</Compress>
       <GeneratePremultipliedAlpha Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GeneratePremultipliedAlpha>
       <GenerateMips Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</GenerateMips>
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources/Textures/%(Filename).dds</ContentOutput>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ImageContentTask>
     <ImageContentTask Include="PakPakMonster\Textures\number.png">
       <Compress Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">None</Compress>
       <GeneratePremultipliedAlpha Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GeneratePremultipliedAlpha>
       <GenerateMips Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</GenerateMips>
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources/Textures/%(Filename).dds</ContentOutput>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ImageContentTask>
     <ImageContentTask Include="PakPakMonster\Textures\player.png">
       <Compress Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">None</Compress>
       <GeneratePremultipliedAlpha Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GeneratePremultipliedAlpha>
       <GenerateMips Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</GenerateMips>
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources/Textures/%(Filename).dds</ContentOutput>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ImageContentTask>
     <ImageContentTask Include="PakPakMonster\Textures\result.png">
       <Compress Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">None</Compress>
       <GeneratePremultipliedAlpha Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GeneratePremultipliedAlpha>
       <GenerateMips Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</GenerateMips>
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resources/Textures/%(Filename).dds</ContentOutput>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
