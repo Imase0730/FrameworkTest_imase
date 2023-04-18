@@ -102,9 +102,6 @@
     </Manifest>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ImageContentTask Include="PakPakMonster\Textures\bg_01.png">
       <Filter>PakPakMonster\Textures</Filter>
     </ImageContentTask>
@@ -129,5 +126,8 @@
     <ImageContentTask Include="PakPakMonster\Textures\result.png">
       <Filter>PakPakMonster\Textures</Filter>
     </ImageContentTask>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

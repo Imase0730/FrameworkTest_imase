@@ -1,4 +1,4 @@
-// --------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------
 // File: Direction.h
 //
 // •ûŒü‚Ì’è”‚ğ‚Ü‚Æ‚ß‚½ƒwƒbƒ_
@@ -11,26 +11,26 @@
 namespace PakPakMonster
 {
 	// ˆÚ“®•ûŒü
-#define UP    (1 << 0)
-#define DOWN  (1 << 1)
-#define LEFT  (1 << 2)
-#define RIGHT (1 << 3)
+	static const int UP = (1 << 0);
+	static const int DOWN = (1 << 1);
+	static const int LEFT = (1 << 2);
+	static const int RIGHT = (1 << 3);
 
-#define U UP
-#define D DOWN
-#define L LEFT
-#define R RIGHT
+	static const int U = UP;
+	static const int D = DOWN;
+	static const int L = LEFT;
+	static const int R = RIGHT;
 
-#define DR (D | R)
-#define DL (D | L)
-#define UR (U | R)
-#define UL (U | L)
-#define LR (L | R)
-#define UD (U | D)
-#define UDR (U | D | R)
-#define UDL (U | D | L)
-#define ULR (U | L | R)
-#define DLR (D | L | R)
-#define UDLR (U | D | L | R)
+	static const int DR = (D | R);
+	static const int DL = (D | L);
+	static const int UR = (U | R);
+	static const int UL = (U | L);
+	static const int LR = (L | R);
+	static const int UD = (U | D);
+	static const int UDR = (U | D | R);
+	static const int UDL = (U | D | L);
+	static const int ULR = (U | L | R);
+	static const int DLR = (D | L | R);
+	static const int UDLR = (U | D | L | R);
 }
 

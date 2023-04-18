@@ -63,7 +63,6 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
     {
         s_fullscreen = false;
     }
-    g_game->SetFullscreenMode(s_fullscreen);
 
     // Register class and create window
     {
@@ -109,6 +108,8 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 
         g_game->Initialize(hwnd, rc.right - rc.left, rc.bottom - rc.top);
 
+        if (s_fullscreen) g_game->SetFullscreenState(true);
+
     }
 
     // Main message loop
@@ -126,7 +127,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
         }
     }
 
-    if (s_fullscreen) g_game->QuitFullscreen();
+    if (s_fullscreen) g_game->SetFullscreenState(false);
     
     g_game.reset();
 
@@ -176,27 +177,27 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         break;
 
     case WM_SIZE:
-        //if (wParam == SIZE_MINIMIZED)
-        //{
-        //    if (!s_minimized)
-        //    {
-        //        s_minimized = true;
-        //        if (!s_in_suspend && game)
-        //            game->OnSuspending();
-        //        s_in_suspend = true;
-        //    }
-        //}
-        //else if (s_minimized)
-        //{
-        //    s_minimized = false;
-        //    if (s_in_suspend && game)
-        //        game->OnResuming();
-        //    s_in_suspend = false;
-        //}
-        //else if (!s_in_sizemove && game)
-        //{
-        //    game->OnWindowSizeChanged(LOWORD(lParam), HIWORD(lParam));
-        //}
+        if (wParam == SIZE_MINIMIZED)
+        {
+            if (!s_minimized)
+            {
+                s_minimized = true;
+                if (!s_in_suspend && game)
+                    game->OnSuspending();
+                s_in_suspend = true;
+            }
+        }
+        else if (s_minimized)
+        {
+            s_minimized = false;
+            if (s_in_suspend && game)
+                game->OnResuming();
+            s_in_suspend = false;
+        }
+        else if (!s_in_sizemove && game)
+        {
+            game->OnWindowSizeChanged(LOWORD(lParam), HIWORD(lParam));
+        }
         break;
 
     case WM_ENTERSIZEMOVE:
@@ -334,7 +335,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_MOUSEHOVER:
         Mouse::ProcessMessage(message, wParam, lParam);
         break;
-    }
+
+     }
 
     return DefWindowProc(hWnd, message, wParam, lParam);
 }

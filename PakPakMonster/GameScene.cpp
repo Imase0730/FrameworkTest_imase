@@ -1,5 +1,5 @@
-// --------------------------------------------------------------------------------------
-// File: PakPakMonster.cpp
+// -------------------------------------------------------------------------------------
+// File: GameScene.cpp
 //
 // ゲームのメインクラス
 //
@@ -444,7 +444,7 @@ void GameScene::UpdateGame()
 
 	// モンスターと接触した？
 	int type;
-	if (HitCheck(&type) == TRUE)
+	if (IsHit(&type) == true)
 	{
 		// 通常はプレイヤーは死亡
 		if (m_monster.GetState(type) == Monster::State::Normal)
@@ -731,7 +731,7 @@ void GameScene::GameOver()
 }
 
 // プレイヤーとモンスターの衝突判定をする関数
-bool GameScene::HitCheck(int* type)
+bool GameScene::IsHit(int* type)
 {
 	int px, py;
 	int mx, my;

@@ -201,18 +201,6 @@ void Player::Dead()
 // アニメーションの更新関数
 void Player::UpdateAnime()
 {
-	PlayerAnime animeNo[8] =
-	{
-		PlayerAnime::Normal_01,
-		PlayerAnime::Dead_01,
-		PlayerAnime::Dead_02,
-		PlayerAnime::Dead_03,
-		PlayerAnime::None,
-		PlayerAnime::Dead_03,
-		PlayerAnime::Dead_02,
-		PlayerAnime::Dead_01,
-	};
-
 	// プレイヤーが死んだ時なら
 	if (m_state == Player::PlayerState::Dead)
 	{

@@ -44,6 +44,8 @@ public:
     void OnDisplayChange();
     void OnWindowSizeChanged(int width, int height);
 
+    void OnSyscommand();
+
     // Properties
     void GetDefaultSize( int& width, int& height ) const noexcept;
 
@@ -65,14 +67,17 @@ private:
 
 public:
 
-    void SetFullscreenMode(bool value)
+    void SetFullscreenState(bool value)
     {
-        m_deviceResources->SetFullscreenMode(value);
-    }
-
-    void QuitFullscreen()
-    {
-        m_deviceResources->GetSwapChain()->SetFullscreenState(FALSE, nullptr);
+        if (value)
+        {
+            m_deviceResources->GetSwapChain()->SetFullscreenState(TRUE, nullptr);
+            m_deviceResources->CreateWindowSizeDependentResources();
+        }
+        else
+        {
+            m_deviceResources->GetSwapChain()->SetFullscreenState(FALSE, nullptr);
+        }
     }
 
 private:

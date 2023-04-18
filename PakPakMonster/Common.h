@@ -1,4 +1,4 @@
-// --------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------
 // File: Common.h
 //
 // 共通で使用する定数をまとめたヘッダ
@@ -31,7 +31,7 @@ namespace PakPakMonster
 	// 得点
 	static const int SCORE_FOOD = 20;		// えさ
 	static const int SCORE_POWER = 100;		// パワーえさ
-	static const int SCORE_MONSTER = 100;	// モンスター
+	static const int SCORE_MONSTER = 200;	// モンスター
 
 	// 残機数
 	static const int LEVEL1_PLAYER_CNT = 6;	// レベル１（６機）

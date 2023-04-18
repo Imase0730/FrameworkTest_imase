@@ -139,6 +139,7 @@ void Game::Clear()
 void Game::OnActivated()
 {
     // TODO: Game is becoming active window.
+
 }
 
 void Game::OnDeactivated()
@@ -149,6 +150,7 @@ void Game::OnDeactivated()
 void Game::OnSuspending()
 {
     // TODO: Game is being power-suspended (or minimized).
+
 }
 
 void Game::OnResuming()
@@ -156,17 +158,20 @@ void Game::OnResuming()
     m_timer.ResetElapsedTime();
 
     // TODO: Game is being power-resumed (or returning from minimize).
+
 }
 
 void Game::OnWindowMoved()
 {
     auto const r = m_deviceResources->GetOutputSize();
     m_deviceResources->WindowSizeChanged(r.right, r.bottom);
+
 }
 
 void Game::OnDisplayChange()
 {
     m_deviceResources->UpdateColorSpace();
+
 }
 
 void Game::OnWindowSizeChanged(int width, int height)
@@ -177,6 +182,11 @@ void Game::OnWindowSizeChanged(int width, int height)
     CreateWindowSizeDependentResources();
 
     // TODO: Game window is being resized.
+}
+
+void Game::OnSyscommand()
+{
+    m_deviceResources->CreateWindowSizeDependentResources();
 }
 
 // Properties
@@ -240,6 +250,7 @@ void Game::OnDeviceLost()
 
 void Game::OnDeviceRestored()
 {
+
     CreateDeviceDependentResources();
 
     CreateWindowSizeDependentResources();

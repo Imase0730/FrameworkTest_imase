@@ -77,8 +77,7 @@ DeviceResources::DeviceResources(
         m_outputSize{0, 0, 1, 1},
         m_colorSpace(DXGI_COLOR_SPACE_RGB_FULL_G22_NONE_P709),
         m_options(flags | c_FlipPresent),
-        m_deviceNotify(nullptr),
-        m_fullscreen(false)
+        m_deviceNotify(nullptr)
 {
 }
 
@@ -289,7 +288,7 @@ void DeviceResources::CreateWindowSizeDependentResources()
             backBufferHeight,
             backBufferFormat,
             flags
-//            (m_options & c_AllowTearing) ? DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING : 0u
+ /*           (m_options & c_AllowTearing) ? DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING : 0u*/
             );
 
         if (hr == DXGI_ERROR_DEVICE_REMOVED || hr == DXGI_ERROR_DEVICE_RESET)
@@ -327,20 +326,11 @@ void DeviceResources::CreateWindowSizeDependentResources()
         swapChainDesc.SwapEffect = (m_options & (c_FlipPresent | c_AllowTearing | c_EnableHDR)) ? DXGI_SWAP_EFFECT_FLIP_DISCARD : DXGI_SWAP_EFFECT_DISCARD;
         swapChainDesc.AlphaMode = DXGI_ALPHA_MODE_IGNORE;
         swapChainDesc.Flags = (m_options & c_AllowTearing) ? DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING : 0u;
-        swapChainDesc.Flags |= DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;  // <-- ’Ç‰Á
+        swapChainDesc.Flags |= DXGI_MODE_SCALING_STRETCHED;
 
         DXGI_SWAP_CHAIN_FULLSCREEN_DESC fsSwapChainDesc = {};
-        //fsSwapChainDesc.Windowed = TRUE;
+        fsSwapChainDesc.Windowed = TRUE;
  
-        if (m_fullscreen)
-        {
-            fsSwapChainDesc.Windowed = FALSE;
-        }
-        else
-        {
-            fsSwapChainDesc.Windowed = TRUE;
-        }
-
         // Create a SwapChain from a Win32 window.
         ThrowIfFailed(m_dxgiFactory->CreateSwapChainForHwnd(
             m_d3dDevice.Get(),
@@ -413,13 +403,13 @@ bool DeviceResources::WindowSizeChanged(int width, int height)
     newRc.left = newRc.top = 0;
     newRc.right = width;
     newRc.bottom = height;
-    if (m_outputSize.right == width && m_outputSize.bottom == height)
-    {
-        // Handle color space settings for HDR
-        UpdateColorSpace();
+    //if (m_outputSize.right == width && m_outputSize.bottom == height)
+    //{
+    //    // Handle color space settings for HDR
+    //    UpdateColorSpace();
 
-        return false;
-    }
+    //    return false;
+    //}
 
     m_outputSize = newRc;
     CreateWindowSizeDependentResources();
